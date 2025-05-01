@@ -4,28 +4,25 @@ import {
   Text,
   Image,
   StyleSheet,
-  Dimensions,
+  StatusBar,
   SafeAreaView,
 } from 'react-native';
 
 const LoadingScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.contentContainer}>
+      <StatusBar backgroundColor="#1E1E1E" barStyle="light-content" />
+      <Image
+        source={require('../assets/images/car-wash-loading.png')}
+        style={styles.backgroundImage}
+        resizeMode="cover"
+      />
+      <View style={styles.overlay}>
         <Text style={styles.headerText}>Loading Screen</Text>
-        <View style={styles.imageContainer}>
-          <Image
-            source={require('../assets/images/car-wash-loading.png')}
-            style={styles.image}
-            resizeMode="cover"
-          />
-          <View style={styles.overlayContainer}>
-            <View style={styles.messageBox}>
-              <Text style={styles.messageText}>
-                Please Wait For App{'\n'}To Load Properly
-              </Text>
-            </View>
-          </View>
+        <View style={styles.messageBox}>
+          <Text style={styles.messageText}>
+            Please Wait For App{'\n'}To Load Properly
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -37,49 +34,34 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1E1E1E',
   },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  headerText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    marginBottom: 15,
-    fontWeight: '400',
-  },
-  imageContainer: {
-    width: Dimensions.get('window').width * 0.8,
-    height: Dimensions.get('window').height * 0.7,
-    borderRadius: 15,
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  image: {
+  backgroundImage: {
+    position: 'absolute',
     width: '100%',
     height: '100%',
   },
-  overlayContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: 'center',
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    marginBottom: 20,
+    fontWeight: '600',
   },
   messageBox: {
     backgroundColor: 'rgba(139, 0, 0, 0.9)',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   messageText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     fontWeight: '500',
   },

@@ -17,64 +17,67 @@ const SignInScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.card}>
+      <View style={styles.content}>
         <Text style={styles.welcomeText}>WELCOME</Text>
-        <Text style={styles.subtitleText}>
+
+        <Text style={styles.promoText}>
           First time creating a new account?
-          {'\n'}Get a free bottle of your choice!
+          {'\n'}Get a free soda of your choice!
         </Text>
 
-        <Text style={styles.accountText}>Already have an account?</Text>
-        <Text style={styles.benefitsText}>
-          Sign in now for guaranteed 1.5%
-          {'\n'}cashback for every order!
+        <Text style={styles.accountText}>
+          Already have an account?
+          {'\n'}Sign in now for guaranteed 2.5%
+          {'\n'}cashback for every orders!
         </Text>
 
-        <Image
-          source={require('../assets/images/car-wash-products.png')}
-          style={styles.image}
-          resizeMode="contain"
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../assets/images/car-wash-products.png')}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Email Address</Text>
+        <View style={styles.formContainer}>
+          <Text style={styles.inputLabel}>Email Address</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your email"
-            placeholderTextColor="#A9A9A9"
+            placeholder="Enter your email address"
+            placeholderTextColor="#999"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
           />
-        </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Password</Text>
+          <Text style={styles.inputLabel}>Password</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
-            placeholderTextColor="#A9A9A9"
+            placeholderTextColor="#999"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
           />
+
+          <TouchableOpacity style={styles.signInButton} onPress={() => {}}>
+            <Text style={styles.signInButtonText}>SIGN IN</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.createAccountButton}
+            onPress={() => navigation.navigate('SignUp')}>
+            <Text style={styles.createAccountText}>Create New Account</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.skipButton}
+            onPress={() => navigation.navigate('Main')}>
+            <Text style={styles.skipButtonText}>
+              Continue without an account
+            </Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity style={styles.signInButton} onPress={() => {}}>
-          <Text style={styles.signInButtonText}>SIGN IN</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.createAccountButton}
-          onPress={() => navigation.navigate('SignUp')}>
-          <Text style={styles.createAccountText}>Create New Account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.guestButton} onPress={() => {}}>
-          <Text style={styles.guestButtonText}>
-            Continue without an account
-          </Text>
-        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -83,70 +86,67 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1E1E1E',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  card: {
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 25,
-    width: '100%',
-    maxWidth: 350,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 120,
     alignItems: 'center',
   },
   welcomeText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#8B0000',
     marginBottom: 10,
-  },
-  subtitleText: {
     textAlign: 'center',
-    fontSize: 14,
+  },
+  promoText: {
+    fontSize: 20,
+    color: '#333',
     marginBottom: 15,
+    textAlign: 'center',
   },
   accountText: {
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  benefitsText: {
+    fontSize: 20,
+    color: '#333',
     textAlign: 'center',
-    fontSize: 14,
+    marginBottom: 15,
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   image: {
-    width: 150,
-    height: 100,
-    marginBottom: 20,
+    width: 180,
+    height: 180,
   },
-  inputContainer: {
+  formContainer: {
     width: '100%',
-    marginBottom: 15,
   },
-  label: {
+  inputLabel: {
     fontSize: 14,
-    marginBottom: 5,
     color: '#333',
+    marginBottom: 5,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
+    backgroundColor: '#F5F5F5',
+    borderRadius: 5,
     paddingHorizontal: 15,
-    paddingVertical: 10,
+    paddingVertical: 12,
     fontSize: 14,
+    marginBottom: 15,
+    color: '#333',
     width: '100%',
-    backgroundColor: '#F8F8F8',
   },
   signInButton: {
     backgroundColor: '#8B0000',
-    borderRadius: 8,
-    paddingVertical: 12,
-    width: '100%',
+    borderRadius: 5,
+    paddingVertical: 15,
     alignItems: 'center',
-    marginTop: 10,
+    marginBottom: 10,
+    width: '100%',
   },
   signInButtonText: {
     color: 'white',
@@ -154,19 +154,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   createAccountButton: {
-    marginTop: 15,
-    marginBottom: 5,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 5,
+    paddingVertical: 15,
+    alignItems: 'center',
+    marginBottom: 15,
+    width: '100%',
   },
   createAccountText: {
-    color: '#8B0000',
+    color: '#333',
     fontSize: 14,
     fontWeight: '500',
   },
-  guestButton: {
-    marginTop: 5,
+  skipButton: {
+    alignItems: 'center',
+    width: '100%',
   },
-  guestButtonText: {
-    color: '#777',
+  skipButtonText: {
+    color: '#666',
     fontSize: 14,
   },
 });

@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 20,
+    justifyContent: 'space-between',
+    paddingVertical: 40,
   },
   header: {
-    paddingTop: 40,
+    marginTop: 50,
     alignItems: 'center',
   },
   title: {
@@ -59,16 +61,17 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
   },
   image: {
     width: '100%',
     height: 240,
   },
   footer: {
-    paddingBottom: 40,
+    alignItems: 'center',
+    marginBottom: 50,
   },
   subtitle: {
     fontSize: 28,
@@ -82,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: 'center',
+    width: '100%',
   },
   buttonText: {
     color: 'white',

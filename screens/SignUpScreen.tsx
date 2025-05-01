@@ -7,62 +7,79 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <StatusBar backgroundColor="#1E1E1E" barStyle="light-content" />
 
-      <Image
-        source={require('../assets/images/car-wash-products.png')}
-        style={styles.image}
-        resizeMode="contain"
-      />
+      <View style={styles.content}>
+        <Text style={styles.title}>Sign Up</Text>
 
-      <View style={styles.formContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Name</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your name"
-            placeholderTextColor="#A9A9A9"
-            value={name}
-            onChangeText={setName}
+        <View style={styles.imageContainer}>
+          <Image
+            source={require('../assets/images/car-wash-products.png')}
+            style={styles.image}
+            resizeMode="contain"
           />
         </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your email"
-            placeholderTextColor="#A9A9A9"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-          />
-        </View>
+        <View style={styles.formContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Name</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Type your name"
+              placeholderTextColor="#A9A9A9"
+              value={name}
+              onChangeText={setName}
+            />
+          </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Password</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Type your password"
-            placeholderTextColor="#A9A9A9"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-        </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Type your email"
+              placeholderTextColor="#A9A9A9"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+            />
+          </View>
 
-        <TouchableOpacity style={styles.signUpButton} onPress={() => {}}>
-          <Text style={styles.signUpButtonText}>SIGN UP</Text>
-        </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Password</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Type your password"
+              placeholderTextColor="#A9A9A9"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+            />
+          </View>
+
+          <TouchableOpacity
+            style={styles.signUpButton}
+            onPress={() => navigation.navigate('Main')}>
+            <Text style={styles.signUpButtonText}>SIGN UP</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}>
+            <Text style={styles.backButtonText}>Back to Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -72,21 +89,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 20,
+  },
+  content: {
+    marginTop: 150,
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 20,
+    marginBottom: 20,
     textAlign: 'center',
+    color: '#8B0000',
   },
-  image: {
-    width: '100%',
-    height: 150,
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 20,
   },
+  image: {
+    width: 200,
+    height: 200,
+  },
   formContainer: {
-    flex: 1,
     width: '100%',
   },
   inputContainer: {
@@ -94,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   label: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 5,
     color: '#333',
   },
@@ -104,22 +131,32 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 15,
     paddingVertical: 12,
-    fontSize: 16,
+    fontSize: 14,
     width: '100%',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '#F5F5F5',
   },
   signUpButton: {
     backgroundColor: '#8B0000',
-    borderRadius: 10,
+    borderRadius: 5,
     paddingVertical: 15,
     width: '100%',
     alignItems: 'center',
     marginTop: 20,
+    marginBottom: 10,
   },
   signUpButtonText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  backButton: {
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+  },
+  backButtonText: {
+    color: '#666',
+    fontSize: 14,
   },
 });
 
