@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface BottomNavbarProps {
   navigation: any;
@@ -18,55 +17,65 @@ const BottomNavbar = ({navigation, activeScreen}: BottomNavbarProps) => {
         style={styles.navItem}
         onPress={() => navigateTo('Cart')}
         activeOpacity={0.7}>
-        <Icon
-          name="shopping-cart"
-          size={24}
-          color={activeScreen === 'cart' ? '#8B0000' : '#666'}
-        />
+        <Text
+          style={[
+            styles.navText,
+            activeScreen === 'cart' ? styles.activeText : {},
+          ]}>
+          Cart
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigateTo('Gallery')}
         activeOpacity={0.7}>
-        <Icon
-          name="photo-library"
-          size={24}
-          color={activeScreen === 'gallery' ? '#8B0000' : '#666'}
-        />
+        <Text
+          style={[
+            styles.navText,
+            activeScreen === 'gallery' ? styles.activeText : {},
+          ]}>
+          Gallery
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigateTo('Home')}
         activeOpacity={0.7}>
-        <Icon
-          name="home"
-          size={24}
-          color={activeScreen === 'home' ? '#8B0000' : '#666'}
-        />
+        <Text
+          style={[
+            styles.navText,
+            activeScreen === 'home' ? styles.activeText : {},
+          ]}>
+          Home
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigateTo('Profile')}
         activeOpacity={0.7}>
-        <Icon
-          name="person"
-          size={24}
-          color={activeScreen === 'profile' ? '#8B0000' : '#666'}
-        />
+        <Text
+          style={[
+            styles.navText,
+            activeScreen === 'profile' ? styles.activeText : {},
+          ]}>
+          Profile
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.navItem}
         onPress={() => navigateTo('Menu')}
         activeOpacity={0.7}>
-        <Icon
-          name="more-horiz"
-          size={24}
-          color={activeScreen === 'menu' ? '#8B0000' : '#666'}
-        />
+        <Text
+          style={[
+            styles.navText,
+            activeScreen === 'menu' ? styles.activeText : {},
+          ]}>
+          Menu
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -85,8 +94,17 @@ const styles = StyleSheet.create({
   navItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 60,
+    width: 70,
     height: 60,
+  },
+  navText: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  activeText: {
+    color: '#8B0000',
+    fontWeight: 'bold',
   },
 });
 

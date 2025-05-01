@@ -8,6 +8,8 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import BottomNavbar from '../components/BottomNavbar';
@@ -16,51 +18,58 @@ const HomeScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.logoContainer}>
-            <Image
-              source={require('../assets/images/car-wash-products.png')}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-            <Text style={styles.title}>Home</Text>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="white"
+        translucent={false}
+      />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.content}>
+          {/* Header */}
+          <View style={styles.header}>
+            <View style={styles.logoContainer}>
+              <Image
+                source={require('../assets/images/car-wash-products.png')}
+                style={styles.logo}
+                resizeMode="contain"
+              />
+              <Text style={styles.title}>Home</Text>
+            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+              <Image
+                source={require('../assets/images/profile-picture.png')}
+                style={styles.avatar}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+
+          {/* Search Bar */}
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search"
+              placeholderTextColor="#FF0000"
+            />
+          </View>
+
+          {/* Promotions */}
+          <Text style={styles.sectionTitle}>Promotions !</Text>
+
+          <ScrollView style={styles.promotionsContainer}>
             <Image
-              source={require('../assets/images/profile-picture.png')}
-              style={styles.avatar}
+              source={require('../assets/images/promo.png')}
+              style={styles.promoImage}
               resizeMode="cover"
             />
-          </TouchableOpacity>
+          </ScrollView>
         </View>
 
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search"
-            placeholderTextColor="#FF0000"
-          />
-        </View>
-
-        {/* Promotions */}
-        <Text style={styles.sectionTitle}>Promotions !</Text>
-
-        <ScrollView style={styles.promotionsContainer}>
-          <Image
-            source={require('../assets/images/promo.png')}
-            style={styles.promoImage}
-            resizeMode="cover"
-          />
-        </ScrollView>
-      </View>
-
-      {/* Bottom Navigation */}
-      <BottomNavbar navigation={navigation} activeScreen="home" />
-    </SafeAreaView>
+        {/* Bottom Navigation */}
+        <BottomNavbar navigation={navigation} activeScreen="home" />
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -68,8 +77,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+    paddingTop: Platform.OS === 'android' ? 0 : 0,
   },
   content: {
+    marginTop: 40,
     flex: 1,
     padding: 15,
   },
@@ -120,7 +131,7 @@ const styles = StyleSheet.create({
   },
   promoImage: {
     width: '100%',
-    height: 350,
+    height: 550,
     borderRadius: 10,
   },
 });
