@@ -3,7 +3,7 @@ import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 
 interface BottomNavbarProps {
   navigation: any;
-  activeScreen: 'home' | 'cart' | 'gallery' | 'profile' | 'menu';
+  activeScreen: 'home' | 'cart' | 'profile' | 'menu';
 }
 
 const BottomNavbar = ({navigation, activeScreen}: BottomNavbarProps) => {
@@ -15,7 +15,7 @@ const BottomNavbar = ({navigation, activeScreen}: BottomNavbarProps) => {
     <View style={styles.navbarContainer}>
       <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigateTo('Cart')}
+        onPress={() => navigateTo('Payment')}
         activeOpacity={0.7}>
         <Text
           style={[
@@ -23,19 +23,6 @@ const BottomNavbar = ({navigation, activeScreen}: BottomNavbarProps) => {
             activeScreen === 'cart' ? styles.activeText : {},
           ]}>
           Cart
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.navItem}
-        onPress={() => navigateTo('Gallery')}
-        activeOpacity={0.7}>
-        <Text
-          style={[
-            styles.navText,
-            activeScreen === 'gallery' ? styles.activeText : {},
-          ]}>
-          Gallery
         </Text>
       </TouchableOpacity>
 

@@ -11,6 +11,9 @@ import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import ServiceDetailsScreen from './screens/ServiceDetailsScreen';
+import UserProfile from './screens/UserProfile';
+import Setting from './screens/Setting';
+import Payment from './screens/Payment';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +42,9 @@ function App(): React.JSX.Element {
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Menu" component={MenuScreen} />
+          <Stack.Screen name="Profile" component={UserProfile} />
+          <Stack.Screen name="Setting" component={Setting} />
+          <Stack.Screen name="Payment" component={Payment} />
           <Stack.Screen
             name="ServiceDetails"
             component={ServiceDetailsScreen}
