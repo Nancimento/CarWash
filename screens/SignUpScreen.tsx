@@ -3,13 +3,13 @@ import {
   View,
   Text,
   Image,
-  TextInput,
   StyleSheet,
-  TouchableOpacity,
   SafeAreaView,
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Button from '../components/Button';
+import InputField from '../components/InputField';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
@@ -33,52 +33,41 @@ const SignUpScreen = () => {
         </View>
 
         <View style={styles.formContainer}>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Name</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Type your name"
-              placeholderTextColor="#A9A9A9"
-              value={name}
-              onChangeText={setName}
-            />
-          </View>
+          <InputField
+            label="Name"
+            placeholder="Type your name"
+            value={name}
+            onChangeText={setName}
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Type your email"
-              placeholderTextColor="#A9A9A9"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-            />
-          </View>
+          <InputField
+            label="Email"
+            placeholder="Type your email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Type your password"
-              placeholderTextColor="#A9A9A9"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-            />
-          </View>
+          <InputField
+            label="Password"
+            placeholder="Type your password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
 
-          <TouchableOpacity
+          <Button
+            title="SIGN UP"
+            onPress={() => navigation.navigate('Main')}
+            type="primary"
             style={styles.signUpButton}
-            onPress={() => navigation.navigate('Main')}>
-            <Text style={styles.signUpButtonText}>SIGN UP</Text>
-          </TouchableOpacity>
+          />
 
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => navigation.goBack()}>
-            <Text style={styles.backButtonText}>Back to Sign In</Text>
-          </TouchableOpacity>
+          <Button
+            title="Back to Sign In"
+            onPress={() => navigation.goBack()}
+            type="text"
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -116,47 +105,9 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
   },
-  inputContainer: {
-    width: '100%',
-    marginBottom: 15,
-  },
-  label: {
-    fontSize: 14,
-    marginBottom: 5,
-    color: '#333',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    fontSize: 14,
-    width: '100%',
-    backgroundColor: '#F5F5F5',
-  },
   signUpButton: {
-    backgroundColor: '#8B0000',
-    borderRadius: 5,
-    paddingVertical: 15,
-    width: '100%',
-    alignItems: 'center',
     marginTop: 20,
     marginBottom: 10,
-  },
-  signUpButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  backButton: {
-    alignItems: 'center',
-    width: '100%',
-    paddingVertical: 10,
-  },
-  backButtonText: {
-    color: '#666',
-    fontSize: 14,
   },
 });
 

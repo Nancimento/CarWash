@@ -1,14 +1,8 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-} from 'react-native';
+import {View, Text, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Button from '../components/Button';
+import InputField from '../components/InputField';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -40,43 +34,41 @@ const SignInScreen = () => {
         </View>
 
         <View style={styles.formContainer}>
-          <Text style={styles.inputLabel}>Email Address</Text>
-          <TextInput
-            style={styles.input}
+          <InputField
+            label="Email Address"
             placeholder="Enter your email address"
-            placeholderTextColor="#999"
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
           />
 
-          <Text style={styles.inputLabel}>Password</Text>
-          <TextInput
-            style={styles.input}
+          <InputField
+            label="Password"
             placeholder="Enter your password"
-            placeholderTextColor="#999"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
           />
 
-          <TouchableOpacity style={styles.signInButton} onPress={() => {}}>
-            <Text style={styles.signInButtonText}>SIGN IN</Text>
-          </TouchableOpacity>
+          <Button
+            title="SIGN IN"
+            onPress={() => {}}
+            type="primary"
+            style={styles.signInButton}
+          />
 
-          <TouchableOpacity
+          <Button
+            title="Create New Account"
+            onPress={() => navigation.navigate('SignUp')}
+            type="secondary"
             style={styles.createAccountButton}
-            onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.createAccountText}>Create New Account</Text>
-          </TouchableOpacity>
+          />
 
-          <TouchableOpacity
-            style={styles.skipButton}
-            onPress={() => navigation.navigate('Main')}>
-            <Text style={styles.skipButtonText}>
-              Continue without an account
-            </Text>
-          </TouchableOpacity>
+          <Button
+            title="Continue without an account"
+            onPress={() => navigation.navigate('Main')}
+            type="text"
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -125,54 +117,11 @@ const styles = StyleSheet.create({
   formContainer: {
     width: '100%',
   },
-  inputLabel: {
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 5,
-  },
-  input: {
-    backgroundColor: '#F5F5F5',
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    paddingVertical: 12,
-    fontSize: 14,
-    marginBottom: 15,
-    color: '#333',
-    width: '100%',
-  },
   signInButton: {
-    backgroundColor: '#8B0000',
-    borderRadius: 5,
-    paddingVertical: 15,
-    alignItems: 'center',
     marginBottom: 10,
-    width: '100%',
-  },
-  signInButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
   },
   createAccountButton: {
-    backgroundColor: '#E5E5E5',
-    borderRadius: 5,
-    paddingVertical: 15,
-    alignItems: 'center',
     marginBottom: 15,
-    width: '100%',
-  },
-  createAccountText: {
-    color: '#333',
-    fontSize: 14,
-    fontWeight: '500',
-  },
-  skipButton: {
-    alignItems: 'center',
-    width: '100%',
-  },
-  skipButtonText: {
-    color: '#666',
-    fontSize: 14,
   },
 });
 

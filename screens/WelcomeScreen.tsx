@@ -4,11 +4,11 @@ import {
   Text,
   Image,
   StyleSheet,
-  TouchableOpacity,
   SafeAreaView,
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Button from '../components/Button';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -32,11 +32,13 @@ const WelcomeScreen = () => {
       <View style={styles.footer}>
         <Text style={styles.subtitle}>Enjoy Your{'\n'}vehicle wash</Text>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('SignIn')}>
-          <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>
+        <Button
+          title="Get Started"
+          onPress={() => navigation.navigate('SignIn')}
+          type="primary"
+          style={styles.getStartedButton}
+          textStyle={styles.getStartedButtonText}
+        />
       </View>
     </SafeAreaView>
   );
@@ -80,17 +82,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     color: '#000',
   },
-  button: {
-    backgroundColor: '#8B0000',
+  getStartedButton: {
     borderRadius: 10,
-    paddingVertical: 15,
-    alignItems: 'center',
-    width: '100%',
   },
-  buttonText: {
-    color: 'white',
+  getStartedButtonText: {
     fontSize: 18,
-    fontWeight: 'bold',
   },
 });
 
