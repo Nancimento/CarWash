@@ -52,7 +52,11 @@ const SignInScreen = () => {
 
           <Button
             title="SIGN IN"
-            onPress={() => {}}
+            onPress={() => {
+              // You would normally validate credentials here
+              // For now, just navigate to Home screen like the "Continue without account" button
+              navigation.navigate('Home');
+            }}
             type="primary"
             style={styles.signInButton}
           />
@@ -66,7 +70,7 @@ const SignInScreen = () => {
 
           <Button
             title="Continue without an account"
-            onPress={() => navigation.navigate('Main')}
+            onPress={() => navigation.navigate('Home')}
             type="text"
           />
         </View>

@@ -58,7 +58,7 @@ const SignUpScreen = () => {
 
           <Button
             title="SIGN UP"
-            onPress={() => navigation.navigate('Main')}
+            onPress={() => navigation.navigate('SignIn')}
             type="primary"
             style={styles.signUpButton}
           />

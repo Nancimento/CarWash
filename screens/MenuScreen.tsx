@@ -21,7 +21,7 @@ const MenuScreen = () => {
         <View style={styles.header}>
           <View style={styles.logoContainer}>
             <Image
-              source={require('../assets/images/car-wash-product.png')}
+              source={require('../assets/images/car-wash-products.png')}
               style={styles.logo}
               resizeMode="contain"
             />

@@ -11,9 +11,6 @@ import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import ServiceDetailsScreen from './screens/ServiceDetailsScreen';
-import CartScreen from './screens/CartScreen';
-import GalleryScreen from './screens/GalleryScreen';
-import ProfileScreen from './screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +18,6 @@ function App(): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
@@ -47,9 +43,6 @@ function App(): React.JSX.Element {
             name="ServiceDetails"
             component={ServiceDetailsScreen}
           />
-          <Stack.Screen name="Cart" component={CartScreen} />
-          <Stack.Screen name="Gallery" component={GalleryScreen} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
