@@ -3,7 +3,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StatusBar} from 'react-native';
-
+import './src/config/Firebase';
 import LoadingScreen from './screens/LoadingScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SignInScreen from './screens/SignInScreen';
@@ -11,6 +11,7 @@ import SignUpScreen from './screens/SignUpScreen';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import ServiceDetailsScreen from './screens/ServiceDetailsScreen';
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,7 @@ function App(): React.JSX.Element {
             component={ServiceDetailsScreen}
           />
         </Stack.Navigator>
+        <FlashMessage position="top" />
       </NavigationContainer>
     </SafeAreaProvider>
   );

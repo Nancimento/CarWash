@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,15 +7,39 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+
+  const handleSignUp = async () => {
+    const auth = getAuth();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // User successfully created
+      showMessage({
+        message: 'Account created successfully!',
+        type: 'success',
+        icon: 'success',
+      });
+      navigation.navigate('SignIn'); // Navigate to Sign In screen
+    } catch (error) {
+      // Handle errors
+      showMessage({
+        message: 'Error',
+        description: error.message,
+        type: 'danger',
+        icon: 'danger',
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -58,7 +82,7 @@ const SignUpScreen = () => {
 
           <Button
             title="SIGN UP"
-            onPress={() => navigation.navigate('SignIn')}
+            onPress={handleSignUp}
             type="primary"
             style={styles.signUpButton}
           />
