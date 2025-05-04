@@ -8,38 +8,45 @@ import {
   StatusBar,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { showMessage } from 'react-native-flash-message';
+import {auth,app} from './../src/config/Firebase';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import {showMessage} from 'react-native-flash-message';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import {getDatabase, ref, set} from 'firebase/database';
 
-const SignUpScreen = () => {
-  const [name, setName] = useState('');
+
+const SignUpScreen = ({navigation}) => {
+
+  const [name, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
 
-  const handleSignUp = async () => {
-    const auth = getAuth();
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // User successfully created
+
+const handleSignUp = () => {
+ // Gunakan instance Firebase yang diinisialisasi
+  const db = getDatabase(app);
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      set(ref(db, 'users/' + user.uid), {
+        name: name,
+        email: email,
+      });
       showMessage({
-        message: 'Account created successfully!',
+        message: 'Registration success',
         type: 'success',
-        icon: 'success',
       });
-      navigation.navigate('SignIn'); // Navigate to Sign In screen
-    } catch (error) {
-      // Handle errors
+      navigation.navigate('SignIn');
+    })
+    .catch(error => {
       showMessage({
-        message: 'Error',
-        description: error.message,
+        message: error.message,
         type: 'danger',
-        icon: 'danger',
       });
-    }
-  };
+    });
+};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,7 +68,7 @@ const SignUpScreen = () => {
             label="Name"
             placeholder="Type your name"
             value={name}
-            onChangeText={setName}
+            onChangeText={setFullName}
           />
 
           <InputField

@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, SafeAreaView} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { showMessage } from 'react-native-flash-message';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getDatabase, ref, get } from 'firebase/database';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
 
@@ -8,6 +11,49 @@ const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
+
+  const handleSignIn = async () => {
+    const auth = getAuth();
+    const db = getDatabase();
+
+    if (!email || !password) {
+      showMessage({
+        message: 'Please enter email and password',
+        type: 'danger',
+      });
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Ambil data dari Realtime Database
+      const userRef = ref(db, 'users/' + user.uid);
+      const snapshot = await get(userRef);
+
+      if (snapshot.exists()) {
+        const userData = snapshot.val();
+        showMessage({
+          message: `Welcome back, ${userData.name || 'User'}!`,
+          type: 'success',
+        });
+      } else {
+        showMessage({
+          message: 'User data not found in database',
+          type: 'warning',
+        });
+      }
+
+      navigation.navigate('Home');
+    } catch (error) {
+      showMessage({
+        message: 'Sign in failed',
+        description: error.message,
+        type: 'danger',
+      });
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,11 +98,7 @@ const SignInScreen = () => {
 
           <Button
             title="SIGN IN"
-            onPress={() => {
-              // You would normally validate credentials here
-              // For now, just navigate to Home screen like the "Continue without account" button
-              navigation.navigate('Home');
-            }}
+            onPress={handleSignIn}
             type="primary"
             style={styles.signInButton}
           />
