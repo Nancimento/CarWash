@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -19,7 +19,7 @@ const UserProfile = () => {
       {/* Header Section */}
       <View style={styles.header}>
         <Image
-          source={require('../assets/images/car-wash-products.png')}
+          source={require('../../assets/images/car-wash-products.png')}
           style={styles.headerImage}
         />
         <View style={styles.headerInfo}>
@@ -40,7 +40,7 @@ const UserProfile = () => {
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <Image
-            source={require('../assets/images/profile-picture.png')}
+            source={require('../../assets/images/profile-picture.png')}
             style={styles.profileImage}
           />
         </TouchableOpacity>
@@ -49,7 +49,7 @@ const UserProfile = () => {
       {/* Main Content */}
       <View style={styles.mainContent}>
         <Image
-          source={require('../assets/images/car-wash-products.png')}
+          source={require('../../assets/images/car-wash-products.png')}
           style={styles.mainImage}
         />
         <Text style={styles.cardNumber}>6062269593912344</Text>

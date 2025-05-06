@@ -12,7 +12,7 @@ import {
   Platform,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -30,7 +30,7 @@ const HomeScreen = () => {
           <View style={styles.header}>
             <View style={styles.logoContainer}>
               <Image
-                source={require('../assets/images/car-wash-products.png')}
+                source={require('../../assets/images/car-wash-products.png')}
                 style={styles.logo}
                 resizeMode="contain"
               />
@@ -38,7 +38,7 @@ const HomeScreen = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
               <Image
-                source={require('../assets/images/profile-picture.png')}
+                source={require('../../assets/images/profile-picture.png')}
                 style={styles.avatar}
                 resizeMode="cover"
               />
@@ -59,7 +59,7 @@ const HomeScreen = () => {
 
           <ScrollView style={styles.promotionsContainer}>
             <Image
-              source={require('../assets/images/promo.png')}
+              source={require('../../assets/images/promo.png')}
               style={styles.promoImage}
               resizeMode="cover"
             />

@@ -11,7 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 
 const MenuScreen = () => {
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const MenuScreen = () => {
           <View style={styles.header}>
             <View style={styles.logoContainer}>
               <Image
-                source={require('../assets/images/car-wash-products.png')}
+                source={require('../../assets/images/car-wash-products.png')}
                 style={styles.logo}
                 resizeMode="contain"
               />
@@ -37,7 +37,7 @@ const MenuScreen = () => {
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
               <Image
-                source={require('../assets/images/profile-picture.png')}
+                source={require('../../assets/images/profile-picture.png')}
                 style={styles.avatar}
                 resizeMode="cover"
               />
@@ -49,7 +49,7 @@ const MenuScreen = () => {
             {/* Service 1: Motorcycle Wash */}
             <View style={styles.serviceItem}>
               <Image
-                source={require('../assets/images/cuci-motor.png')}
+                source={require('../../assets/images/cuci-motor.png')}
                 style={styles.serviceImage}
                 resizeMode="cover"
               />
@@ -65,7 +65,7 @@ const MenuScreen = () => {
             {/* Service 2: Car Wash */}
             <View style={styles.serviceItem}>
               <Image
-                source={require('../assets/images/cuci-oto.png')}
+                source={require('../../assets/images/cuci-oto.png')}
                 style={styles.serviceImage}
                 resizeMode="cover"
               />

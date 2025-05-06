@@ -4,16 +4,16 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {StatusBar} from 'react-native';
 
-import LoadingScreen from './screens/LoadingScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import SignInScreen from './screens/SignInScreen';
-import SignUpScreen from './screens/SignUpScreen';
-import HomeScreen from './screens/HomeScreen';
-import MenuScreen from './screens/MenuScreen';
-import ServiceDetailsScreen from './screens/ServiceDetailsScreen';
-import UserProfile from './screens/UserProfile';
-import Setting from './screens/Setting';
-import Payment from './screens/Payment';
+import LoadingScreen from './src/screens/LoadingScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen';
+import SignInScreen from './src/screens/SignInScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import MenuScreen from './src/screens/MenuScreen';
+import ServiceDetailsScreen from './src/screens/ServiceDetailsScreen';
+import UserProfile from './src/screens/UserProfile';
+import Setting from './src/screens/Setting';
+import Payment from './src/screens/Payment';
 
 const Stack = createStackNavigator();
 

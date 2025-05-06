@@ -10,7 +10,7 @@ import {
   Settings,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 
 const Setting = () => {
   const navigation = useNavigation();
@@ -39,7 +39,7 @@ const Setting = () => {
       <View style={styles.content}>
         <View style={styles.headerContainer}>
           <Image
-            source={require('../assets/images/car-wash-products.png')}
+            source={require('../../assets/images/car-wash-products.png')}
             style={styles.headerImage}
           />
           <Text style={styles.header}>Settings</Text>

@@ -8,7 +8,7 @@ import {
   StatusBar,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Button from '../components/Button';
+import Button from '../../components/Button';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
@@ -23,7 +23,7 @@ const WelcomeScreen = () => {
 
       <View style={styles.imageContainer}>
         <Image
-          source={require('../assets/images/car-wash-products.png')}
+          source={require('../../assets/images/car-wash-products.png')}
           style={styles.image}
           resizeMode="contain"
         />

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 import {useRoute, useNavigation} from '@react-navigation/native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 
 const ServiceDetailsScreen = () => {
   const navigation = useNavigation();

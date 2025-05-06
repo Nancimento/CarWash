@@ -13,7 +13,7 @@ const LoadingScreen = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#1E1E1E" barStyle="light-content" />
       <Image
-        source={require('../assets/images/car-wash-loading.png')}
+        source={require('../../assets/images/car-wash-products.png')}
         style={styles.backgroundImage}
         resizeMode="cover"
       />

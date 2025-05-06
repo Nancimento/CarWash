@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import BottomNavbar from '../components/BottomNavbar';
+import BottomNavbar from '../../components/BottomNavbar';
 import {useNavigation} from '@react-navigation/native';
 
 const Payment = () => {
@@ -44,7 +44,7 @@ const Payment = () => {
       <SafeAreaView style={styles.container}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Image
-            source={require('../assets/images/BackArrow.png')}
+            source={require('../../assets/images/BackArrow.png')}
             style={styles.backArrow}
           />
         </TouchableOpacity>
@@ -54,7 +54,7 @@ const Payment = () => {
             <Text style={styles.orderReadyText}>Your Order is Ready</Text>
             <Text style={styles.cashierText}>Cashier 2</Text>
             <Image
-              source={require('../assets/images/Symantec.png')} // Replace with your checkmark image
+              source={require('../../assets/images/Symantec.png')} // Replace with your checkmark image
               style={styles.checkmarkImage}
             />
             <Text style={styles.thankYouText}>Thank You</Text>
@@ -78,13 +78,13 @@ const Payment = () => {
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
-              source={require('../assets/images/BackArrow.png')}
+              source={require('../../assets/images/BackArrow.png')}
               style={styles.backArrow}
             />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Payment</Text>
           <Image
-            source={require('../assets/images/profile-picture.png')}
+            source={require('../../assets/images/profile-picture.png')}
             style={styles.profileImage}
           />
         </View>
@@ -93,7 +93,7 @@ const Payment = () => {
         <View style={styles.itemContainer}>
           <View style={styles.item}>
             <Image
-              source={require('../assets/images/cuci-oto.png')}
+              source={require('../../assets/images/cuci-oto.png')}
               style={styles.itemImage}
             />
             <View style={styles.itemDetails}>
@@ -115,7 +115,7 @@ const Payment = () => {
 
           <View style={styles.item}>
             <Image
-              source={require('../assets/images/cuci-motor.png')}
+              source={require('../../assets/images/cuci-motor.png')}
               style={styles.itemImage}
             />
             <View style={styles.itemDetails}>

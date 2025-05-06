@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,16 +6,48 @@ import {
   StyleSheet,
   SafeAreaView,
   StatusBar,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import Button from '../components/Button';
-import InputField from '../components/InputField';
+  Alert,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import Button from "../../components/Button";
+import InputField from "../../components/InputField";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, firestore } from "../config/Firebase"; // Pastikan path ini benar
 
 const SignUpScreen = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const navigation = useNavigation();
+
+  const handleSignUp = async () => {
+    if (!email || !password || !name) {
+      Alert.alert("Error", "All fields are required");
+      return;
+    }
+
+    try {
+      // Buat pengguna baru dengan email dan password
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const userId = userCredential.user.uid;
+
+      // Simpan data pengguna ke Firestore
+      await setDoc(doc(firestore, "users", userId), {
+        name,
+        email,
+      });
+
+      Alert.alert("Success", "User registered successfully!");
+      navigation.navigate("SignIn");
+    } catch (error) {
+      Alert.alert("Error", error.message || "Something went wrong");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,7 +58,7 @@ const SignUpScreen = () => {
 
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/images/car-wash-products.png')}
+            source={require("../../assets/images/car-wash-products.png")}
             style={styles.image}
             resizeMode="contain"
           />
@@ -58,7 +90,7 @@ const SignUpScreen = () => {
 
           <Button
             title="SIGN UP"
-            onPress={() => navigation.navigate('SignIn')}
+            onPress={handleSignUp}
             type="primary"
             style={styles.signUpButton}
           />
@@ -77,25 +109,25 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   content: {
     marginTop: 150,
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
-    color: '#8B0000',
+    textAlign: "center",
+    color: "#8B0000",
   },
   imageContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 20,
   },
   image: {
@@ -103,7 +135,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   formContainer: {
-    width: '100%',
+    width: "100%",
   },
   signUpButton: {
     marginTop: 20,

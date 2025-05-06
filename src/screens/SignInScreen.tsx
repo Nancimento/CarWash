@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Button from '../components/Button';
-import InputField from '../components/InputField';
+import Button from '../../components/Button';
+import InputField from '../../components/InputField';
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +27,7 @@ const SignInScreen = () => {
 
         <View style={styles.imageContainer}>
           <Image
-            source={require('../assets/images/car-wash-products.png')}
+            source={require('../../assets/images/car-wash-products.png')}
             style={styles.image}
             resizeMode="contain"
           />
