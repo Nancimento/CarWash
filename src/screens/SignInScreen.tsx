@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, SafeAreaView, Alert} from 'react-native';
+import {View, Text, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {showMessage} from 'react-native-flash-message';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -15,7 +16,11 @@ const SignInScreen = () => {
 
   const handleSignIn = async () => {
     if (!email || !password) {
-      Alert.alert('Error', 'Please fill in all fields');
+      showMessage({
+        message: 'Error',
+        description: 'Please fill in all fields',
+        type: 'danger',
+      });
       return;
     }
 
@@ -35,21 +40,33 @@ const SignInScreen = () => {
         
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          // Store user data locally if needed
-          // For example: AsyncStorage.setItem('userData', JSON.stringify(userData));
           
-          Alert.alert('Success', `Welcome back, ${userData.name}!`, [
-            {
-              text: 'OK',
-              onPress: () => navigation.navigate('Home')
-            }
-          ]);
+          showMessage({
+            message: 'Welcome back!',
+            description: `Happy to see you again, ${userData.name}!`,
+            type: 'success',
+            duration: 3000,
+            icon: 'success',
+            style: {
+              backgroundColor: '#8B0000', // Matches your theme color
+            },
+          });
+
+          navigation.navigate('Home');
         } else {
-          Alert.alert('Error', 'User data not found in database');
+          showMessage({
+            message: 'Error',
+            description: 'User data not found in database',
+            type: 'danger',
+          });
         }
       }
     } catch (error) {
-      Alert.alert('Error', error.message);
+      showMessage({
+        message: 'Error',
+        description: error.message,
+        type: 'danger',
+      });
     } finally {
       setLoading(false);
     }

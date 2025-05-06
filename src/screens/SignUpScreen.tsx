@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
+import { showMessage } from "react-native-flash-message";
 // Import from our firebase config
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set } from "firebase/database";
@@ -24,10 +25,15 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSignUp = async () => {
-    if (!email || !password || !name) {
-      Alert.alert("Error", "All fields are required");
+    if (!email || !password || !name || !phone) {
+      showMessage({
+        message: "Error",
+        description: "All fields are required",
+        type: "danger",
+      });
       return;
     }
 
@@ -44,22 +50,25 @@ const SignUpScreen = ({ navigation }) => {
       await set(ref(database, 'users/' + userId), {
         name: name,
         email: email,
+        phone: phone, // Add phone field in signup form
         createdAt: new Date().toISOString(),
         // Add any additional user data you want to store
       });
 
-      Alert.alert(
-        "Success", 
-        "Account created successfully!",
-        [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate("SignIn")
-          }
-        ]
-      );
+      showMessage({
+        message: "Success",
+        description: "Account created successfully! Please sign in.",
+        type: "success",
+        duration: 3000,
+      });
+
+      navigation.navigate("SignIn");
     } catch (error) {
-      Alert.alert("Error", error.message);
+      showMessage({
+        message: "Error",
+        description: error.message,
+        type: "danger",
+      });
     }
   };
 
@@ -96,6 +105,14 @@ const SignUpScreen = ({ navigation }) => {
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
+          />
+
+          <InputField
+            label="Phone"
+            placeholder="Type your phone number"
+            value={phone}
+            onChangeText={setPhone}
+            keyboardType="phone-pad"
           />
 
           <InputField

@@ -10,7 +10,7 @@ import {
   Settings,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BottomNavbar from '../../components/BottomNavbar';
+import BottomNavbar from '../components/BottomNavbar';
 
 const Setting = () => {
   const navigation = useNavigation();
@@ -27,7 +27,7 @@ const Setting = () => {
       title: 'Create Pin Number',
       onPress: () => navigation.navigate('CreatePin'),
     },
-    {title: 'Logout', onPress: () => navigation.navigate('Logout')},
+    {title: 'Logout', onPress: () => navigation.navigate('SignIn')},
   ];
 
   const infoItems = [
