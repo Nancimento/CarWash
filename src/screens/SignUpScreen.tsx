@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   View,
   Text,
@@ -9,17 +9,29 @@ import {
   Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, firestore } from "../config/Firebase"; // Pastikan path ini benar
+// Import from our firebase config
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
+// Rest of your code stays the same
+
+// Define your navigation types
+type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  // Add other screens as needed
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   const handleSignUp = async () => {
     if (!email || !password || !name) {
@@ -28,26 +40,30 @@ const SignUpScreen = () => {
     }
 
     try {
-      // Buat pengguna baru dengan email dan password
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
+      const userCredential = await auth().createUserWithEmailAndPassword(
         email,
         password
       );
+
       const userId = userCredential.user.uid;
 
-      // Simpan data pengguna ke Firestore
-      await setDoc(doc(firestore, "users", userId), {
-        name,
-        email,
-      });
+      await firestore()
+        .collection('users')
+        .doc(userId)
+        .set({
+          name,
+          email,
+        });
 
       Alert.alert("Success", "User registered successfully!");
       navigation.navigate("SignIn");
-    } catch (error) {
-      Alert.alert("Error", error.message || "Something went wrong");
+    } catch (error: any) {
+      console.error("Signup error:", error);
+      Alert.alert("Error", error.message || "An error occurred during sign up");
     }
   };
+  
+  // Rest of component remains the same
 
   return (
     <SafeAreaView style={styles.container}>
