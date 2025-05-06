@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   SafeAreaView,
   StatusBar,
@@ -10,28 +9,21 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import Button from "../../components/Button";
-import InputField from "../../components/InputField";
+import Button from "../components/Button";
+import InputField from "../components/InputField";
 // Import from our firebase config
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { ref, set } from "firebase/database";
+import { auth, database } from "../config/Firebase";
+
 
 // Rest of your code stays the same
 
 // Define your navigation types
-type RootStackParamList = {
-  SignIn: undefined;
-  SignUp: undefined;
-  // Add other screens as needed
-};
-
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'SignUp'>;
-
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const navigation = useNavigation<NavigationProp>();
 
   const handleSignUp = async () => {
     if (!email || !password || !name) {
@@ -40,29 +32,39 @@ const SignUpScreen = () => {
     }
 
     try {
-      const userCredential = await auth().createUserWithEmailAndPassword(
-        email,
+      // Create user in Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth, 
+        email, 
         password
       );
-
       const userId = userCredential.user.uid;
 
-      await firestore()
-        .collection('users')
-        .doc(userId)
-        .set({
-          name,
-          email,
-        });
+      // Save user data to Realtime Database
+      await set(ref(database, 'users/' + userId), {
+        name: name,
+        email: email,
+        createdAt: new Date().toISOString(),
+        // Add any additional user data you want to store
+      });
 
-      Alert.alert("Success", "User registered successfully!");
-      navigation.navigate("SignIn");
-    } catch (error: any) {
-      console.error("Signup error:", error);
-      Alert.alert("Error", error.message || "An error occurred during sign up");
+      Alert.alert(
+        "Success", 
+        "Account created successfully!",
+        [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("SignIn")
+          }
+        ]
+      );
+    } catch (error) {
+      Alert.alert("Error", error.message);
     }
   };
-  
+
+
+
   // Rest of component remains the same
 
   return (
@@ -72,13 +74,13 @@ const SignUpScreen = () => {
       <View style={styles.content}>
         <Text style={styles.title}>Sign Up</Text>
 
-        <View style={styles.imageContainer}>
+        {/* <View style={styles.imageContainer}>
           <Image
             source={require("../../assets/images/car-wash-products.png")}
             style={styles.image}
             resizeMode="contain"
           />
-        </View>
+        </View> */}
 
         <View style={styles.formContainer}>
           <InputField
