@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,32 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import BottomNavbar from '../../components/BottomNavbar';
+import BottomNavbar from '../components/BottomNavbar';
 import {useNavigation} from '@react-navigation/native';
+import { auth, database } from '../config/Firebase';
+import { ref, get } from 'firebase/database';
 
 const Payment = () => {
+  const [userData, setUserData] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
   const [quantities, setQuantities] = useState({carWash: 1, bikeWash: 1});
   const [isOrderComplete, setIsOrderComplete] = useState(false); // State for order confirmation
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = ref(database, 'users/' + user.uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          setUserData(snapshot.val());
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handlePaymentMethod = method => {
     setSelectedPaymentMethod(method);
@@ -146,8 +164,12 @@ const Payment = () => {
 
         {/* User Info */}
         <View style={styles.userInfo}>
-          <Text style={styles.userInfoText}>Name: Bonito Gonzalez</Text>
-          <Text style={styles.userInfoText}>Phone: 082372635268</Text>
+          <Text style={styles.userInfoText}>
+            Name: {userData ? userData.name : 'Loading...'}
+          </Text>
+          <Text style={styles.userInfoText}>
+            Phone: {userData ? userData.phone || '082372635268' : '082372635268'}
+          </Text>
         </View>
 
         {/* Payment Methods */}
